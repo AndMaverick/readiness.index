@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "readiness.index"
+version = "0.1.0"
+description = "Score an organization's AI readiness across weighted dimensions, find the gaps, and order the work by impact. Dependency-free Python."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "AndMaverick LLC" }]
+
+[tool.setuptools.packages.find]
+include = ["readiness_index*"]
