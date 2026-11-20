@@ -149,13 +149,13 @@ Talent moved by eight points, but the interval crosses zero, so this panel does 
 
 - **Exact scoring.** Dimension and overall scores are computed in rational arithmetic, so a result sitting exactly on 60.0 is Scaling, not Developing because of floating point.
 - **Bottleneck rule.** A weighted average lets strength in one area pay for failure in another. The reported level is the level the average earns, capped at one step above the weakest dimension, and the report says which dimension held it down.
-- **Roadmap by exact optimization.** Gaps are closed one after another. Finishing valuable work early is worth more than finishing it late, so the order minimizes the sum of benefit times completion time, subject to prerequisites. Without prerequisites that is the benefit-per-effort rule. With them that rule can be wrong, and the problem is hard in general, but a plan has a handful of gaps, so `readiness_index/planner.py` finds the exact optimum by dynamic programming over subsets (up to 16 gaps).
-- **Uncertainty from the panel.** Respondents are resampled with replacement, seeded, with the small-panel correction that makes intervals honest for panels of ten or fewer.
+- **Roadmap by exact optimization.** Gaps are closed one after another. Finishing valuable work early is worth more than finishing it late, so the order minimizes the sum of benefit times completion time, subject to prerequisites. Without prerequisites that is the benefit per effort rule. With them that rule can be wrong, and the problem is hard in general, but a plan has a handful of gaps, so `readiness_index/planner.py` finds the exact optimum by dynamic programming over subsets (up to 16 gaps).
+- **Uncertainty from the panel.** Respondents are resampled with replacement, seeded, with the small panel correction that makes intervals honest for panels of ten or fewer.
 - **Pinned.** Every result carries a SHA-256 fingerprint of the input, the library version and the method. Two people running the same file get the same fingerprint and the same numbers.
 
 ## Evidence
 
-The scoring, the agreement statistic and the sequencer are tested against implementations that share no code with them (`tests/oracles.py`): a from-the-definition rational recomputation, Krippendorff's coincidence-matrix method, and brute force over every permutation. The agreement code also reproduces the published value (alpha 0.849) from Krippendorff's worked example. `python examples/evaluate.py` reruns everything from fixed seeds:
+The scoring, the agreement statistic and the sequencer are tested against implementations that share no code with them (`tests/oracles.py`): a straight from the definition rational recomputation, Krippendorff's coincidence matrix method, and brute force over every permutation. The agreement code also reproduces the published value (alpha 0.849) from Krippendorff's worked example. `python examples/evaluate.py` reruns everything from fixed seeds:
 
 ```
 Krippendorff alpha vs the coincidence-matrix method: 296 random rater designs, largest gap 5.6e-16
@@ -166,15 +166,15 @@ reliable-change flag over 100 simulated before/after pairs of 9 respondents: 11%
 2000 bootstrap resamples of a 12-respondent, 24-item assessment: 1.1 s
 ```
 
-The suite has 75+ tests: oracles, invariances (respondent order, duplicated respondents, uniform shifts), boundary exactness, strict-input rejection, gate behavior, exit codes, and identical output under different `PYTHONHASHSEED` values.
+The suite has 75+ tests: oracles, invariances (respondent order, duplicated respondents, uniform shifts), boundary exactness, strict input rejection, gate behavior, exit codes, and identical output under different `PYTHONHASHSEED` values.
 
 ## Honest limits
 
 - A score is only as good as the ratings. The instrument fixes what a 1, 3 and 5 mean and the evidence audit shows where a high rating has nothing behind it, but a panel that is wrong together will be wrong with a narrow interval.
-- Intervals describe panel sampling, not bias. Even with the small-panel correction they are somewhat optimistic below about a dozen respondents: in simulation the 95% interval covered the true score 88 percent of the time with 8 respondents and 95 percent with 24.
-- "Reliable change" means the interval for the change excludes zero. With 9 respondents per wave it flagged 11 percent of no-change pairs, so read it as "probably real", and collect more respondents before acting on a borderline result.
-- Krippendorff's alpha rewards raters for tracking differences between questions. In a company that is uniformly mid-level it is low even when the panel agrees closely, which is why the report also gives the average disagreement in rating points and the list of contested questions.
-- The level bands (40, 60 and 80) and the one-step bottleneck are conventions, stated in the output. The roadmap is only as good as the effort per point and the prerequisites you supply; the defaults treat every point as equal effort with no prerequisites.
+- Intervals describe panel sampling, not bias. Even with the small panel correction they are somewhat optimistic below about a dozen respondents: in simulation the 95% interval covered the true score 88 percent of the time with 8 respondents and 95 percent with 24.
+- "Reliable change" means the interval for the change excludes zero. With 9 respondents per wave it flagged 11 percent of no change pairs, so read it as "probably real", and collect more respondents before acting on a borderline result.
+- Krippendorff's alpha rewards raters for tracking differences between questions. In a company that is uniformly mid level it is low even when the panel agrees closely, which is why the report also gives the average disagreement in rating points and the list of contested questions.
+- The level bands (40, 60 and 80) and the one step bottleneck are conventions, stated in the output. The roadmap is only as good as the effort per point and the prerequisites you supply; the defaults treat every point as equal effort with no prerequisites.
 - Exact results are identical everywhere. Bootstrap results are reproducible for a given seed on a given Python version; a different Python's random generator may differ in the last digits.
 
 ## Tests
@@ -186,7 +186,5 @@ python -m unittest discover -s tests -t . -v
 MIT licensed. Built by [AndMaverick LLC](https://www.andmaverick.com).
 
 ---
-
-**Related reading:** [The Job Nobody Has Yet](https://blog.andmaverick.com/the-job-nobody-has-yet?utm_source=github&utm_medium=repo&utm_campaign=readiness.index)
 
 **If this is your problem.** If you are deciding what to build, buy, and fund, I help leadership teams make that call with evidence. [Begin a conversation](https://calendly.com/andmaverick?utm_source=github&utm_medium=repo&utm_campaign=readiness.index).
