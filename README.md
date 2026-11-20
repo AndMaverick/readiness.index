@@ -1,6 +1,8 @@
 # readiness.index
 
-Before an organization spends on AI, it should know where it actually stands. readiness.index scores readiness across six weighted dimensions (strategy, data, technology, talent, governance, operations), names the level, finds the gaps, and orders the work by how much each gap matters. Standard library only.
+Ask five people at the same company whether it is ready for AI and you get five sincere answers that cannot be compared. A readiness score built from one person's form says more about who filled it in than about the organization.
+
+readiness.index scores readiness across six weighted dimensions (strategy, data, technology, talent, governance, operations), names the level, finds the gaps, and orders the work by how much each gap matters. Standard library only.
 
 Looking for the guided version? The free [MAO Index](https://www.andmaverick.com/mao-index?utm_source=github&utm_medium=repo&utm_campaign=readiness.index) is the assessment I use with leadership teams. This repository is the scoring engine in code.
 
@@ -182,6 +184,8 @@ The suite has 75+ tests: oracles, invariances (respondent order, duplicated resp
 ```
 python -m unittest discover -s tests -t . -v
 ```
+
+**Related repositories:** [vendor.score](https://github.com/AndMaverick/vendor.score) ranks vendors once you know what to buy and says whether the winner survives a change of weights. [build.buy](https://github.com/AndMaverick/build.buy) compares building with buying on one timeline.
 
 MIT licensed. Built by [AndMaverick LLC](https://www.andmaverick.com).
 
